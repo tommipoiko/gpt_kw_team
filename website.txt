@@ -1,0 +1,1 @@
+I want a website built with Python FastAPI and React that can be used to gather statistics about different sports, in example ping pong, that I play with my friends. I want to be able to view the players win-loss, ranking by elo and win or loss streak.
