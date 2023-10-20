@@ -63,3 +63,9 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+"""
+The team members do not know where we are at with the development. Either send the chat history
+to each member (probably not viable) or make sure the Project Manager let's the other people know
+where we are at.
+"""
