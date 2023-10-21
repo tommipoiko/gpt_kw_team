@@ -16,7 +16,7 @@ class GPTAgent:
     @staticmethod
     def _handle_response(response) -> str:
         collected_messages = []
-        print("\nResponse:\n")
+        print("Response:\n")
         for chunk in response:
             try:
                 chunk_message = chunk["choices"][0]["delta"]["content"]

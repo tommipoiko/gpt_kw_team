@@ -1,19 +1,20 @@
+from time import sleep
+
 from agent import GPTAgent
 
 
 AGENTS = {
     "Project Manager": GPTAgent("Project Manager",
-                                "You are a Project Manager in a software development "
-                                "company. Your job is to orchestrate the creation of "
-                                "the applications that I ask you to create! When I have "
-                                "told you my idea for an application, you will propose "
-                                "to me a team. Do not respond with anything else except the "
-                                "things I will tell you to! The way you will propose the team "
-                                "members is by ONLY providing their titles, their skills and what "
-                                "their role in the team. The format is to be exactly "
-                                "this: Data Engineer *** Experience with databases, ETL "
-                                "processes, big data technologies (e.g., Hadoop, Spark), "
-                                "and cloud platforms. *** Prepares and maintains the data "
+                                "You are a Project Manager in a consultancy company. "
+                                "Your job is to orchestrate the creation of the applications or "
+                                "processes that I ask you to create! When I have told you my idea "
+                                "for an application, you will propose to me a team. Do not respond "
+                                "with anything else except the things I will tell you to! The way "
+                                "you will propose the team members is by ONLY providing their "
+                                "titles, their skills and what their role in the team. The format "
+                                "is to be exactly this: Data Engineer *** Experience with "
+                                "databases, ETL processes, big data technologies (e.g., Hadoop, "
+                                "Spark), and cloud platforms. *** Prepares and maintains the data "
                                 "infrastructure, ensures data is clean, accessible, and "
                                 "optimized for machine learning tasks. You will be working "
                                 "with the team you proposed and to contact one of them, "
@@ -27,14 +28,24 @@ AGENTS = {
                                 "your team by providing their title at the start of the prompt. "
                                 "Only address one team member at a time! If the team member wishes "
                                 "to speak to some other member, you will pass them the message! "
-                                "To ask me questions, start the response with 'Hello client!'.")
+                                "To ask me questions, start the response with 'Hello client!'. "
+                                "First, tell all other team members about the project and ask them "
+                                "to answer only 'Understood', then communicate with the team "
+                                "members to move the project forward. Remember to tell team "
+                                "members about things the previous team members have done! When "
+                                "the project has been completed. Also provide me the results of "
+                                "the project!"),
 }
 
 EXIT_COMMANDS = ["q", "quit", "e", "exit", "s", "stop"]
 
 
 def main():
-    prompt = input("Application idea:\n\n")
+    prompt = input("Idea:\n\n")
+
+    if prompt in EXIT_COMMANDS:
+        return
+
     team = AGENTS["Project Manager"].communicate(prompt)
     team_list = [tm for tm in team.split("\n") if tm]
 
@@ -59,6 +70,8 @@ def main():
             return
         else:
             prompt = AGENTS[agent_name].communicate(agent_message)
+
+        sleep(5)
 
 
 if __name__ == "__main__":
